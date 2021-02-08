@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ title }}</title>
+
+<!-- Bootstrap -->
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+
+
+<!-- local -->
+{% load static %}
+<link rel='icon' type='icon/png' href='{% static "me/favicon/coffee.ico" %}'>
+<link rel='stylesheet' href='{% static "blog/css/style.css" %}'>
+
+</head>
+<body>
+
+<!-- Section Header | links, name, summary -->
+<section id='header' class='section header container-fluid'>
+	{% block header %}{% endblock %}
+	{% block header_nav %}{% endblock %}
+</section>
+
+<!-- Section Content -->
+<section id='content' class='section content container-fluid'>
+	{% block content %}{% endblock %}
+</section>
+
+<!-- Footer | Copyright, tech for site, links -->
+<section class='section footer container-fluid'>{% block footer %}{% endblock %}</section>
+
+<!-- Pop-ups -->
+{% block demo-project-pop-up %}{% endblock demo-project-pop-up %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% load static %}
+<script src='{% static "blog/scripts/index.js" %}'></script>
+
+</body>
+</html>
