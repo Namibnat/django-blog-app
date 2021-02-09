@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <title></title>
-</head>
-<body>
-        x
-</body>
-</html>
+{% extends 'blog/base.html' %}
+
+<!-- header block -->
+{% block header %}
+<h1>Blog Posts</h1>
+{% endblock %}
+
+<!-- nav bar -->
+{% block header_nav %}
+<p><a href="{% url 'home:home' %}">Home</a>
+|
+{% include 'blog/page-links.html' %}
+</p>
+
+{% endblock %}
+
+<!-- blog content -->
+{% block content %}
+{% for post in posts %}
+				<h2>{{ post.title }}</h2>
+				<div class='intro'>{{ post.intro }}</div>
+				<p>Published {{ post.pub_date }}</p>
+				<p><a href="{% url 'blog-posts:blog-detail' slug=post.slug %}">Read more...</a></p>
+				{% if not forloop.last %}
+								<hr>
+				{% endif %}
+{% endfor %}
+
+<hr>
+<p>
+{% include 'blog/page-links.html' %}
+</p>
+<hr>
+
+{% endblock %}
+

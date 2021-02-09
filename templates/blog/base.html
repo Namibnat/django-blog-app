@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>{{ title }}</title>
+<title>{% block title %}Blog Posts{% endblock %}</title>
 
 <!-- Bootstrap -->
 <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
@@ -12,8 +12,9 @@
 
 <!-- local -->
 {% load static %}
-<link rel='icon' type='icon/png' href='{% static "me/favicon/coffee.ico" %}'>
+<link rel='icon' type='icon/png' href='{% static "me/icons/favicon_vernon.ico" %}'>
 <link rel='stylesheet' href='{% static "blog/css/style.css" %}'>
+{% block custom_css %}{% endblock %}
 
 </head>
 <body>
@@ -30,15 +31,34 @@
 </section>
 
 <!-- Footer | Copyright, tech for site, links -->
-<section class='section footer container-fluid'>{% block footer %}{% endblock %}</section>
+<section class='section footer container-fluid'>
+<hr>
+<p class='centered small'>I made this website with
+<a href='https://httpd.apache.org/'>Apache</a>,
+<a href='https://getbootstrap.com/'>Bootstrap</a>,
+and <a href='https://www.djangoproject.com/'>Django</a>
+| 
+It's hosted at 
+<a href='https://www.linode.com/'>Linode</a>
+</p>
 
-<!-- Pop-ups -->
-{% block demo-project-pop-up %}{% endblock demo-project-pop-up %}
+<p class='centered copyright'>Vernon Swanepoel &copy; {{ year }}
+|
+Connect with me on
+<a href="https://twitter.com/sandcurves">Twitter</a>
+|
+<a href="https://github.com/Namibnat">Github</a>
+|
+<a href="me/pdfs/CV-Vernon-Swanepoel.pdf">My CV</a>
+</p>
+
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% load static %}
 <script src='{% static "blog/scripts/index.js" %}'></script>
+{% block custom_javascript %}{% endblock %}
 
 </body>
 </html>

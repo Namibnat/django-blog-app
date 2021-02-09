@@ -1,0 +1,13 @@
+{% if older %}
+<a href="{% url 'blog-posts:blog-archive' page=older %}">Older Posts</a>
+{% endif %}
+{% if older and newer %}
+|
+{% endif %}
+{% if newer %}
+{% if newer == '0' %}
+<a href="{% url 'blog-posts:blog-home' %}">Newer Posts</a>
+{% else %}
+<a href="{% url 'blog-posts:blog-archive' page=newer %}">Newer Posts</a>
+{% endif %}
+{% endif %}

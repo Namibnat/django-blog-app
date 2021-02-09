@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+<!-- custom css -->
+{% block custom_css %}
+{% if post.custom_css %}
+<style>
+{{ post.custom_css|safe }}
+</style>
+{% endif %}
+{% endblock %}
+
+<!-- header block -->
+{% block header %}
+<h1>{{ post.title }}</h1>
+<h2>{{ post.intro }}</h2>
+<p>{{ post.pub_date }}</p>
+
+{% endblock %}
+
+<!-- nav bar -->
+{% block header_nav %}
+<ul>
+				<li><a href="{% url 'home:home' %}">Home</a></li>
+				<li><a href="{% url 'blog-posts:blog-home' %}">Blog</a></li>
+</ul>
+{% endblock %}
+
+<!-- blog content -->
+{% block content %}
+{{ post.body|safe }}
+
+{% endblock %}
+
+<!-- custom javascript -->
+{% block custom_javascript %}
+{% if post.custom_javascript %}
+<script>
+{{ post.custom_javascript|safe }}
+</script>
+{% endif %}
+{% endblock %}

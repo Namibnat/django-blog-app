@@ -1,19 +1,19 @@
 """Models for blog"""
 
 from django.db import models
-from django.utils.text import slugify
 
 
 class Post(models.Model):
     """Model for blog posts"""
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100,
-                            default=slugify(title))
+    slug = models.SlugField(max_length=100)
     intro = models.TextField()
     body = models.TextField()
-    publication_date = models.DateField()
+    pub_date = models.DateField()
     added = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+    custom_css = models.TextField(blank=True)
+    custom_javascript = models.TextField(blank=True)
 
 
 class Image(models.Model):
