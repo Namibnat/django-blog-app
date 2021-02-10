@@ -2,7 +2,7 @@
 
 import datetime as dt
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.views import View
 from django.views.generic.detail import DetailView
@@ -77,9 +77,12 @@ class PostBlogPost(CoreBase):
     """Post a new blog post"""
 
     def get(self, request):
-        self.context['postform'] = PostForm()
-        template_name = 'blog/post_blog_post.html'
-        return render(request, template_name, self.context)
+        if request.user.is_superuser:
+            self.context['postform'] = PostForm()
+            template_name = 'blog/post_blog_post.html'
+            return render(request, template_name, self.context)
+        else:
+            raise Http404
 
     def post(self, request):
         postform = PostForm(request.POST)
