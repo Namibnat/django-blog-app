@@ -13,9 +13,7 @@
 
 <!-- header block -->
 {% block header %}
-<h1>{{ post.title }}</h1>
-<h2>{{ post.intro }}</h2>
-<p>{{ post.pub_date }}</p>
+<h1>{{ post.title|title }}</h1>
 
 {% endblock %}
 
@@ -29,6 +27,8 @@
 
 <!-- blog content -->
 {% block content %}
+<h2>{{ post.intro }}</h2>
+<p>{{ post.pub_date }}</p>
 {{ post.body|safe }}
 
 {% endblock %}

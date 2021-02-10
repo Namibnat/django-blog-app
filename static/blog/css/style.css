@@ -1,0 +1,110 @@
+/* CSS for vernon-swanepoel.me */
+@media (min-width: 700px) {
+}
+@media (max-width: 699px) {
+}
+body {
+				margin: 0;
+				padding: 0;
+				border: none;
+}
+/* All sections */
+a {
+				color: #f4f0bb;
+				text-decoration: none;
+}
+a:hover {
+				color: #eee;
+				text-decoration: none;
+}
+h2, h3, h4 {
+				color: #f4f0bb;
+}
+.section {
+				margin: 0;
+				padding: 0;
+				border: none;
+}
+.centered {
+				text-align: center;
+				display: block;
+				width: 100%;
+}
+.egg_white {
+				color: #eee;
+}
+
+/* Section: header */
+.header {
+				background-color: #EA4855;
+				display: relative;
+				padding: 2rem;
+				margin: 0;
+}
+.header h1 {
+				border: none;
+				color: #eee;
+				font-weight: bold;
+}
+.header ul {
+				padding: 0;
+				margin: 0;
+				border: none;
+}
+.header li {
+				display: inline-block;
+				padding: 0 1rem 0 0;
+}
+/* Section Content 
+	* Note, no CSS for the main content
+	* for blog posts.  Must be added per post
+	*
+	* */
+
+.blog-list-content {
+				padding: 3rem;
+				background-color: #EA4855;
+}
+.blog-post-form-container {
+				background-color: #EA4855;
+				padding: 1rem 0 0 3rem;
+				margin: 0;
+				border: none;
+}
+.blog-post-form-container form input{
+				background-color: #eee;
+				display: block;
+				width: 50%;
+}
+
+.blog-post-form-container form textarea{
+				background-color: #eee;
+				display: block;
+				width: 50%;
+}
+.blog-post-form-container form label{
+				margin: 1rem auto 0.2rem 0;
+				display: block;
+				font-weight: bold;
+				width: 50%;
+}
+
+.blog-post-form-container form button{
+				margin-top: 2rem;
+}
+
+/* Section 'footer' */
+.footer {
+				background-color: #EA4855;
+				padding: 3em;
+}
+.copyright {
+				font-weight: bold;
+}
+.footer a {
+				color: #eee;
+}
+.footer a:hover {
+				color: #000;
+}
+

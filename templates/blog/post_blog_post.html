@@ -6,12 +6,13 @@
 {% endblock %}
 
 {% block content %}
-
+<div class='blog-post-form-container'>
 <form method='post'>
 				{% csrf_token %}
 				{{ postform }}
-				<button type='submit'>Post</button>
+				<button class='btn btn-light' type='submit'>Post</button>
 </form>
+</div>
 
 {% endblock content %}
 
