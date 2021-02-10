@@ -5,7 +5,7 @@ from django.db import models
 
 class Post(models.Model):
     """Model for blog posts"""
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100)
     intro = models.TextField()
     body = models.TextField()
@@ -15,16 +15,15 @@ class Post(models.Model):
     custom_css = models.TextField(blank=True)
     custom_javascript = models.TextField(blank=True)
 
+    def __str__(self):
+        return f"{self.title}"
 
-class Image(models.Model):
-    """Add images to blog posts
 
-    A blog post can have zero to
-    many images, and so the name given
-    should be able to map clearly to
-    a url that can be used in the post"""
+class BlogImage(models.Model):
+    """Add images to use in blog posts
 
-    post = models.ForeignKey(Post,
-                             on_delete=models.CASCADE,
-                             related_name='image')
-    image = models.ImageField()
+    For now, images aren't related to any one
+    blog post, and can just be updloaded in admin
+    """
+
+    image = models.ImageField(upload_to='post/')
