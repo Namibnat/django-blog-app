@@ -8,8 +8,10 @@
 <!-- nav bar -->
 {% block header_nav %}
 <p><a href="{% url 'home:home' %}">Home</a>
+{% if older or newer %}
 |
 {% include 'blog/page-links.html' %}
+{% endif %}
 </p>
 
 {% endblock %}
@@ -17,6 +19,7 @@
 <!-- blog content -->
 {% block content %}
 <div class='blog-list-content'>
+				{% if posts %}
 				{% for post in posts %}
 				<h2><a href="{% url 'blog-posts:blog-detail' slug=post.slug %}">{{ post.title }}</a></h2>
 				<div class='intro'>{{ post.intro }}</div>
@@ -27,10 +30,15 @@
 				{% endif %}
 				{% endfor %}
 
+				{% if older or newer %}
 				<hr>
 				<p>
 				{% include 'blog/page-links.html' %}
 				</p>
+				{% endif %}
+				{% else %}
+				<h2>No posts published yet</h2>
+				{% endif %}
 				<hr>
 </div>
 

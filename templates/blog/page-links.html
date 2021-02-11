@@ -4,7 +4,7 @@
 {% if older and newer %}
 |
 {% endif %}
-{% if newer %}
+{% if newer or newer == '0' %}
 {% if newer == '0' %}
 <a href="{% url 'blog-posts:blog-home' %}">Newer Posts</a>
 {% else %}

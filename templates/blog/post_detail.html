@@ -31,6 +31,24 @@
 <p>{{ post.pub_date }}</p>
 {{ post.body|safe }}
 
+{% if older_post or newer_post %}
+<div class='new-and-old-posts'>
+<p>
+{% if older_post %}
+Older Post: 
+<a href="{% url 'blog-posts:blog-detail' slug=older_post.slug %}">{{ older_post }}</a>
+{% endif %}
+{% if older_post and newer_post %}
+&nbsp;|&nbsp;
+{% endif %}
+{% if newer_post %}
+Newer Post: 
+<a href="{% url 'blog-posts:blog-detail' slug=newer_post.slug %}">{{ newer_post }}</a>
+{% endif %}
+</p>
+</div>
+{% endif %}
+
 {% endblock %}
 
 <!-- custom javascript -->

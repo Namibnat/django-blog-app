@@ -10,6 +10,7 @@ class Post(models.Model):
     intro = models.TextField()
     body = models.TextField()
     pub_date = models.DateField()
+    is_draft = models.BooleanField(default=True)
     added = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     custom_css = models.TextField(blank=True)

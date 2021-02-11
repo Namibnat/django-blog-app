@@ -70,9 +70,12 @@ h2, h3, h4 {
 				padding: 1rem 0 0 3rem;
 				margin: 0;
 				border: none;
+				text-align: left;
 }
-.blog-post-form-container form input{
+.blog-post-form-container form input {
 				background-color: #eee;
+}
+.blog-post-form-container form input[type='text'] {
 				display: block;
 				width: 50%;
 }
@@ -91,6 +94,13 @@ h2, h3, h4 {
 
 .blog-post-form-container form button{
 				margin-top: 2rem;
+}
+.new-and-old-posts {
+				background-color: #EA4855;
+				display: relative;
+				text-align: center;
+				padding: 2rem;
+				margin: 0;
 }
 
 /* Section 'footer' */

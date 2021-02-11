@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.views import View
 from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
 from django.utils.text import slugify
 
 from .forms import PostForm
@@ -28,18 +27,19 @@ class CoreBase(View):
             self.context['year'] = f"2021 - {year}"
 
 
-class BlogList(CoreBase, ListView):
+class BlogList(CoreBase):
     """Home page view"""
-    queryset = Post.objects.order_by('-pub_date')[:PAGE_JUMPS]
-    context_object_name = 'posts'
-    template_name = 'blog/post_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for key, value in self.context.items():
-            context[key] = value
-        context['older'] = 1
-        return context
+    def get(self, request, **kwargs):
+        if request.user.is_superuser:
+            queryset  = Post.objects.order_by('-pub_date')[:PAGE_JUMPS]
+        else:
+            queryset = Post.objects.order_by('-pub_date').filter(is_draft=False)[:PAGE_JUMPS]
+        self.context['posts'] = queryset
+        if queryset.count() >= PAGE_JUMPS:
+            self.context['older'] = 1
+        template_name = 'blog/post_list.html'
+        return render(request, template_name, self.context)
 
 
 class BlogArchive(CoreBase):
@@ -49,6 +49,8 @@ class BlogArchive(CoreBase):
         page_from = page * PAGE_JUMPS
         page_to = page_from + PAGE_JUMPS
         self.context['posts'] = Post.objects.order_by('-pub_date')[page_from: page_to]
+        if not self.context['posts']:
+            raise Http404
         if Post.objects.count() > page_to:
             self.context['older'] = page + 1 
         # Make 'newer' a string so '0' still valid in template
@@ -60,17 +62,23 @@ class BlogArchive(CoreBase):
 class BlogDetail(CoreBase, DetailView):
     """Blog post detail view"""
 
-    model = Post
+    def get(self, request, slug):
+        self.context['post'] = Post.objects.get(slug=slug)
+        if request.user.is_superuser:
+            posts = Post.objects.order_by('-pub_date')
+        else:
+            posts = Post.objects.order_by('-pub_date').filter(is_draft=False)
+        pub_dates = []
+        for post in posts:
+            if post.pub_date > self.context['post'].pub_date:
+                self.context['newer_post']  = post
+            if post.pub_date < self.context['post'].pub_date:
+                self.context['older_post'] = post
+                break
+            pub_dates.append(post.pub_date)
+        template_name = 'blog/post_detail.html'
+        return render(request, template_name, self.context)
 
-    def get_slug_field(self, **kwargs):
-        slug = super().get_slug_field(**kwargs)
-        return slug
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for key, value in self.context.items():
-            context[key] = value
-        return context
 
 
 class PostBlogPost(CoreBase):

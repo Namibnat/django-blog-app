@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content %}
+<div class='centered blog-list-content'>
 {% if posted %}
-<h1><em>{{ posted }}</em><h1>
+<h1>{{ posted }}</h1>
 {% endif %}
 
 <p><a href="{% url 'blog-posts:post-blog-post' %}">Post Another Blog Post</a></p>
 
-
+</div>
 {% endblock content %}
 
 
